@@ -12,7 +12,6 @@ Konfiguration ausschließlich über Umgebungsvariablen (siehe .env.example).
 import logging
 import os
 import socket
-
 import psycopg
 from fastapi import FastAPI, HTTPException
 from psycopg.rows import dict_row
