@@ -2,18 +2,19 @@ terraform {
   required_version = ">= 1.12"
   required_providers {
     google = {
-      source = "hashicorp/google"
-      # version = "~> 8.8"   <- aktuelle Hauptversion in der Registry nachsehen
+      source  = "hashicorp/google"
+      version = "~> 8.8"
     }
     random = {
-      source = "hashicorp/random"
+      source  = "hashicorp/random"
+      version = "~> 3.9"
     }
   }
 }
 
 provider "google" {
-  project = "project-4caa665c-3278-4904-938"
-  region  = "europe-west3"
+  project = var.project_id
+  region  = var.region
 }
 
 resource "random_id" "suffix" {
@@ -21,10 +22,11 @@ resource "random_id" "suffix" {
 }
 
 resource "google_storage_bucket" "test" {
-  name                        = "lernbucket-${random_id.suffix.hex}"
+  name                        = local.bucket_name
   location                    = "EU"
   uniform_bucket_level_access = true
   force_destroy               = true
+  labels                      = local.labels
 }
 
 data "google_client_config" "current" {
