@@ -23,10 +23,14 @@ resource "random_id" "suffix" {
 
 resource "google_storage_bucket" "test" {
   name                        = local.bucket_name
-  location                    = "EU"
+  location                    = var.bucket_settings.location
   uniform_bucket_level_access = true
-  force_destroy               = true
+  force_destroy               = var.environment != "prod"
   labels                      = local.labels
+
+  versioning {
+    enabled = var.bucket_settings.versioning
+  }
 }
 
 data "google_client_config" "current" {
