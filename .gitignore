@@ -10,6 +10,7 @@ __pycache__/
 *.tfstate
 *.tfstate.*
 .terraform/
+terraform/foo.bar
 
 # Editor
 .vscode/
