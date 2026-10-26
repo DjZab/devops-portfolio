@@ -10,6 +10,11 @@ terraform {
       version = "~> 3.9"
     }
   }
+
+  backend "gcs" {
+    bucket = "tfstate-zab-57"
+    prefix = "terraform/state"
+  }
 }
 
 provider "google" {
